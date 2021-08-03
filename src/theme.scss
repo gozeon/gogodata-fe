@@ -1,0 +1,46 @@
+$--font-path: 'element-ui/lib/theme-chalk/fonts';
+
+@import 'element-ui/packages/theme-chalk/src/index';
+
+// tag
+i {
+  cursor: pointer;
+}
+
+// element-ui
+.el-aside {
+  border-right: $--table-border;
+
+  width: 200px;
+}
+
+.el-header {
+  border-bottom: $--table-border;
+}
+
+// utils
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mt-2r {
+  margin-top: 2rem;
+}
+
+.bg-base {
+  background: $--color-white;
+}
