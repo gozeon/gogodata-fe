@@ -17,6 +17,18 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/ds/:groupID',
+    name: 'DataSource',
+    // route level code-splitting
+    // this generates a separate chunk (DataSource.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "DataSource" */ '../views/DataSource.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     // route level code-splitting

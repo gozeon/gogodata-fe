@@ -45,6 +45,19 @@
                       @click="handleShowEditor(item)"
                     ></el-button>
                   </el-tooltip>
+                  <el-tooltip content="数据源" placement="top">
+                    <el-button
+                      style="float: right; padding: 3px 0"
+                      type="text"
+                      icon="el-icon-coin"
+                      @click="
+                        $router.push({
+                          name: 'DataSource',
+                          params: { groupID: item.ID },
+                        })
+                      "
+                    ></el-button>
+                  </el-tooltip>
                 </div>
                 <div class="text">{{ getGroupDescription(item) }}</div>
               </el-card>

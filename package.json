@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "date-fns": "^2.23.0",
     "element-ui": "^2.15.3",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.12",
@@ -22,6 +23,7 @@
     "vuex-class": "^0.3.2"
   },
   "devDependencies": {
+    "@types/date-fns": "^2.6.0",
     "@types/node": "^16.3.1",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.16.1",

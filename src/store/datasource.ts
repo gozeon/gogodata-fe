@@ -22,12 +22,10 @@ export default {
   },
   actions: {
     list({ commit }: { commit: Commit }, payload: ActionPayload) {
-      return axios
-        .get('/group/', { params: { ...payload } })
-        .then((res: any) => {
-          commit('setList', res.data)
-          return res
-        })
+      return axios.get('/ds/', { params: { ...payload } }).then((res: any) => {
+        commit('setList', res.data)
+        return res
+      })
     },
     create(
       { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
