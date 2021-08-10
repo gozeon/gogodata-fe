@@ -26,5 +26,17 @@ export default {
     ) {
       return axios.post('/group/', { ...payload })
     },
+    del(
+      { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
+      payload: any
+    ) {
+      return axios.delete(`/group/${payload?.ID}`)
+    },
+    update(
+      { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
+      payload: any
+    ) {
+      return axios.put(`/group/${payload?.ID}`, { ...payload })
+    },
   },
 }

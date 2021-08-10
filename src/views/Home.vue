@@ -34,6 +34,7 @@
                       style="float: right; padding: 3px 0"
                       type="text"
                       icon="el-icon-delete"
+                      @click="handleDelGroup(item)"
                     ></el-button>
                   </el-tooltip>
                   <el-tooltip content="编辑" placement="top">
@@ -41,13 +42,7 @@
                       style="float: right; padding: 3px 0"
                       type="text"
                       icon="el-icon-edit-outline"
-                    ></el-button>
-                  </el-tooltip>
-                  <el-tooltip content="数据" placement="top">
-                    <el-button
-                      style="float: right; padding: 3px 0"
-                      type="text"
-                      icon="el-icon-data-board"
+                      @click="handleShowEditor(item)"
                     ></el-button>
                   </el-tooltip>
                 </div>
@@ -57,6 +52,12 @@
           </el-col>
         </el-row>
       </el-main>
+
+      <edit-group
+        @edit-success="handleSearch"
+        ref="editGroupDialog"
+        :defaultForm="activeGroup"
+      />
     </el-container>
   </div>
 </template>
@@ -67,11 +68,12 @@ import Sticky from 'vue-sticky-directive'
 
 import { namespace } from 'vuex-class'
 import NewGroup from '../components/NewGroup.vue'
+import EditGroup from '../components/EditGroup.vue'
 
 const appModule = namespace('app')
 const groupModule = namespace('group')
 @Component({
-  components: { NewGroup },
+  components: { NewGroup, EditGroup },
   directives: {
     Sticky,
   },
@@ -80,8 +82,10 @@ export default class Home extends Vue {
   @appModule.State('name') name: any
   @groupModule.State('list') groupList: any
   @groupModule.Action('list') getGroupList: any
+  @groupModule.Action('del') delGroup: any
   search = ''
   searchLoading = false
+  activeGroup = {}
 
   mounted() {
     this.handleSearch()
@@ -91,6 +95,21 @@ export default class Home extends Vue {
     this.searchLoading = true
     await this.getGroupList({ search: this.search })
     this.searchLoading = false
+  }
+
+  async handleDelGroup(group: any) {
+    try {
+      await this.delGroup(group)
+      this.$message.success('删除成功')
+      this.handleSearch()
+    } catch (e) {
+      this.$message.error(e.response.data.message)
+    }
+  }
+
+  handleShowEditor(group: any) {
+    this.activeGroup = { ...group }
+    this.$refs.editGroupDialog.show()
   }
 
   getGroupDescription(group: any) {
