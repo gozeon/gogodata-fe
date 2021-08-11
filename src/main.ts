@@ -9,6 +9,10 @@ import './theme.scss'
 
 Vue.config.productionTip = false
 
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+
 Vue.use(ElementUI)
 
 new Vue({

@@ -31,19 +31,19 @@ export default {
       { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
       payload: ActionPayload
     ) {
-      return axios.post('/group/', { ...payload })
+      return axios.post('/ds/', { ...payload })
     },
     del(
       { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
       payload: any
     ) {
-      return axios.delete(`/group/${payload?.ID}`)
+      return axios.delete(`/ds/${payload?.ID}`)
     },
     update(
       { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
       payload: any
     ) {
-      return axios.put(`/group/${payload?.ID}`, { ...payload })
+      return axios.put(`/ds/${payload?.ID}`, { ...payload })
     },
     info(
       { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
@@ -52,7 +52,7 @@ export default {
       const { id } = payload
       // TODO: cache增强
 
-      return axios.get(`/group/${id}`).then((res) => {
+      return axios.get(`/ds/${id}`).then((res) => {
         commit('appendInfo', res.data)
         return res
       })
