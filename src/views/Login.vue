@@ -39,13 +39,18 @@ export default class Login extends Vue {
   @authModule.Action('login') token: any
 
   async handleLogin() {
-    await this.token(this.form)
-    if (this.$route.query?.nextUrl != null) {
-      this.$router.push(String(this.$route.query.nextUrl))
-    } else {
-      this.$router.push({
-        name: 'Home',
-      })
+    try {
+      await this.token(this.form)
+      if (this.$route.query?.nextUrl != null) {
+        this.$router.push(String(this.$route.query.nextUrl))
+      } else {
+        this.$router.push({
+          name: 'Home',
+        })
+      }
+    } catch (e) {
+      console.log(e)
+      this.$message.error(e.response?.data?.message || e.message)
     }
   }
 

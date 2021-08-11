@@ -18,14 +18,16 @@ export default {
 
   actions: {
     login({ commit }: { commit: Commit }, payload: ActionPayload) {
-      return axios.post('/auth/login', { ...payload }).then((res: any) => {
-        const token = res.data.token
-        localStorage.setItem(import.meta.env.VITE_TOKEN_KEY + '', token)
-        commit('setToken', token)
-      })
+      return axios
+        .post('/auth/login', { ...payload }, { timeout: 1800 })
+        .then((res: any) => {
+          const token = res.data.token
+          localStorage.setItem(import.meta.env.VITE_TOKEN_KEY + '', token)
+          commit('setToken', token)
+        })
     },
     me({ commit }: { commit: Commit }, payload: ActionPayload) {
-      return axios.get('/auth/me').then((res: any) => {
+      return axios.get('/auth/me', { timeout: 1800 }).then((res: any) => {
         commit('setUsername', res.data?.user)
       })
     },
