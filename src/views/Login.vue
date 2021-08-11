@@ -15,6 +15,7 @@
         </el-form-item>
 
         <el-button
+          :loading="loading"
           type="primary"
           :disabled="!(form.user && form.password)"
           @click="handleLogin"
@@ -38,8 +39,11 @@ export default class Login extends Vue {
   }
   @authModule.Action('login') token: any
 
+  loading = false
+
   async handleLogin() {
     try {
+      this.loading = true
       await this.token(this.form)
       if (this.$route.query?.nextUrl != null) {
         this.$router.push(String(this.$route.query.nextUrl))
@@ -48,8 +52,9 @@ export default class Login extends Vue {
           name: 'Home',
         })
       }
+      this.loading = false
     } catch (e) {
-      console.log(e)
+      this.loading = false
       this.$message.error(e.response?.data?.message || e.message)
     }
   }
